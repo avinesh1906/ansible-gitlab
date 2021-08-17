@@ -1,0 +1,7 @@
+---
+# This playbook deploys the whole application stack in this site
+
+- hosts: all
+  roles:
+    - gitlab
+    
