@@ -11,9 +11,9 @@
 # Install Gitlab and its dependencies
 - name:  Install and configure dependencies
   apt:  
-    name: {{item}}
-    state: latest
-    update_cache: yes
+    name={{item}}
+    state=latest
+    update_cache=yes
   loop: 
     - openssh-server
     - ca-certerticates
