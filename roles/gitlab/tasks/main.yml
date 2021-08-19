@@ -16,7 +16,7 @@
     update_cache=yes
   loop: 
     - openssh-server
-    - ca-certerticates
+    - ca-certicates
     - perl
 
 - name: Download Gitlab repository installation script
