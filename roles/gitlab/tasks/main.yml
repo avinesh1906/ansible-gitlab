@@ -34,7 +34,7 @@
   package: 
     name: gitlab-ce
     state: present
-  async: 300
+  sync: 300
   poll: 5
   when: not gitlab_file.stat.exists
 
