@@ -50,7 +50,7 @@
   template:
     src: gitlab.rb.j2
     dest: /etc/gitlab/gitlab.rb
-    owner: rppt
+    owner: root
     group: root
     mode: 0600
   notify: restart gitlab
