@@ -1,2 +1,59 @@
 ---
 # tasks file for gitlab
+- name: Check if Gitlab configuration file already exists
+  stat: path=/etc/gitlab/gitlab.rb
+  register: gitlab_config_files
+
+- name: Check if Gitlab is already installed
+  stat: path=/usr/bin/gitlab-ctl
+  register: gitlab_file
+
+# Install Gitlab and its dependencies
+- name:  Install and configure dependencies
+  apt:  
+    name: {{item}}
+    state: latest
+    update_cache: yes
+  loop: 
+    - openssh-server
+    - ca-certerticates
+    - perl
+
+- name: Download Gitlab repository installation script
+  get_url:
+    url: "{{ gitlab_repository_installation_script_url }}"
+    dest: /tmp/gitlab_installation_repository.sh
+  when: not gitlab_file.stat.exists
+
+- name: Install Gitlab repository
+  command: bash /tmp/gitlab_installation_repository.sh
+  register: output
+  when: not gitlab_file.stat.exists
+
+- name: Install Gitlab
+  package: 
+    name: gitlab-ce
+    state: present
+  sync: 300
+  poll: 5
+  when: not gitlab_file.stat.exists
+
+# Start and configure Gitlab. Sometimes the first run fails, but after that, 
+# restarts fix problems, so ignore failures on this run
+- name: Reconfigure Gitlab
+  command: > 
+    gitlab-ctl reconfigure
+    creates=/var/opt/gitlab/bootstrapped
+  failed_when: false 
+
+- name: Copy Gitlab configuration file
+  template:
+    src: gitlab.rb.j2
+    dest: /etc/gitlab/gitlab.rb
+    owner: rppt
+    group: root
+    mode: 0600
+  notify: restart gitlab
+
+
+  
