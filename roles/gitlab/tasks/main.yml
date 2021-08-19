@@ -16,7 +16,7 @@
     update_cache=yes
   loop: 
     - openssh-server
-    - ca-certicates
+    - ca-certificates
     - perl
 
 - name: Download Gitlab repository installation script
@@ -34,7 +34,7 @@
   package: 
     name: gitlab-ce
     state: present
-  sync: 300
+  async: 300
   poll: 5
   when: not gitlab_file.stat.exists
 
