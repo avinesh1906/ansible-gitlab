@@ -26,11 +26,11 @@
 
 # Reconfigure gitlab with the external_url
 - name: Copy Gitlab configuration file
-lineinfile:
-  path: /etc/gitlab/gitlab.rc
-  regexp: '^external_url [a-z':\/.]*'
-  line: external_url '"{{ external_url }}"'
-notify: restart gitlab
+  lineinfile:
+    path: /etc/gitlab/gitlab.rc
+    regexp: '^external_url [a-z':\/.]*'
+    line: external_url '"{{ external_url }}"'
+  notify: restart gitlab
 
 
   
