@@ -28,7 +28,7 @@
 - name: Copy Gitlab configuration file
   lineinfile:
     path: /etc/gitlab/gitlab.rc
-    regexp: '^external_url [a-z':\/.]*'
+    regexp: '^external_url.*'
     line: external_url '"{{ external_url }}"'
   notify: restart gitlab
 
