@@ -1,2 +1,15 @@
 ---
 # tasks file for gitlab-runner
+- name: Download Gitlab-Runner repository script
+  get_url:
+    url: "{{ gitlabRunner_repository_installation_script_url }}"
+    dest: /tmp/gitlabRunner_installation_repository.sh
+
+- name: Install gitlab-runner repository
+  command: bash /tmp/gitlabRunner_installation_repository.sh
+
+- name: Install gitlab-runner
+  apt: 
+    name: gitlab-runner
+    state: present
+  

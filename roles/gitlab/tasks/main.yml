@@ -17,7 +17,6 @@
 
 - name: Install Gitlab repository
   command: bash /tmp/gitlab_installation_repository.sh
-  register: output
 
 - name: Install Gitlab
   apt: 
