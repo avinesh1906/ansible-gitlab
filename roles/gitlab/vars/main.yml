@@ -1,4 +1,4 @@
 ---
 # vars file for gitlab
-gitlab_repository_installation_script_url: "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh"
-gitlab_external_url: "http://{{ ansible_default_ipv4.address }}:55"
+repository_installation_script_url: "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh"
+external_url: "http://{{ ansible_default_ipv4.address }}:55"
