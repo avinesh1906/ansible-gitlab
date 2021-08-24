@@ -1,1 +1,12 @@
 ---
+# verify if everything works 
+# that is, whether gitlab-runner has access to Docker
+before_script:
+  - docker info
+
+build_image: 
+  script:
+    # add a dot which means to use the Dockerfile in the local directory
+    - docker build -t ansible:phpmyadmin .
+    - docker run -p 8080:80  -it -d ansible:phpmyadmin
+
