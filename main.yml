@@ -3,6 +3,10 @@
 
 - hosts: all
   roles:
-    - gitlab
-    - gitlab-runner
-    
+    - role: gitlab
+      tags:
+        - gitlab
+    - role: gitlab-runner
+      tags:
+        - gitlab-runner
+        - never
